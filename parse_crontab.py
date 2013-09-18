@@ -38,19 +38,38 @@ def write_crontab(lines):
 
 def rewrite_cron(lines, section_name, new_cron_lines):
     start, end, inserted = False, False, False
+    section_header = '%s %s %s %s\n' % ('#' * 5, 'START PROJECT',
+                                        section_name, '#' * 5)
+    section_footer = '%s %s %s %s\n' % ('#' * 5, 'END PROJECT',
+                                        section_name, '#' * 5)
     new_list = []
     for l in lines:
-        if not start and section_name in l:
+        if l == '\n':
+            continue
+        if 'START PROJECT' in l:
+            # Let's add this for better visual display
+            new_list.append('\n\n')
+        if not start and 'START PROJECT %s' % section_name in l:
             start = True
-            new_list.append(l)
-        elif start and section_name in l:
+            new_list.append(section_header)
+            continue
+        elif start and 'END PROJECT %s' % section_name in l:
             end = True
+            new_list.append(section_footer)
+            continue
         if start and not end:
             if not inserted:
                 new_list.extend(new_cron_lines)
                 inserted = True
             continue
         new_list.append(l)
+
+    if not start and not end:
+        new_list.append('\n\n')
+        new_list.append(section_header)
+        new_list.extend(new_cron_lines)
+        new_list.append(section_footer)
+
     return new_list
 
 

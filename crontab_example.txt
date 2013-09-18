@@ -21,16 +21,16 @@
 # 
 # m h  dom mon dow   command
 
-# FOO PROJECT #
+##### START PROJECT FOO #####
 */5 * * * * echo "testing"
-# END FOO PROJECT #
+##### END PROJECT FOO #####
 
 
-# BAZ PROJECT #
+##### START PROJECT BAZ #####
 */40 * * * * echo "baz"
-# END BAZ PROJECT #
+##### END PROJECT BAZ #####
 
 
-# BAR PROJECT #
+##### START PROJECT BAR #####
 */10 * * * * echo "bar"
-# END BAR PROJECT #
+##### END PROJECT BAR #####
