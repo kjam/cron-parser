@@ -16,7 +16,10 @@ def usage():
 
 
 def get_crontab():
-    cron = check_output(['crontab', '-l'])
+    try:
+        cron = check_output(['crontab', '-l'])
+    except:
+        cron = ''
     f = open('/tmp/cron.txt', 'wb')
     f.write(cron)
     f.close()
