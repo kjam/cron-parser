@@ -58,7 +58,7 @@ def rewrite_cron(lines, section_name, new_cron_lines):
             continue
         elif start and 'END PROJECT %s' % section_name in l:
             end = True
-            new_list.append(section_footer)
+            new_list.append('\n' + section_footer)
             continue
         if start and not end:
             if not inserted:

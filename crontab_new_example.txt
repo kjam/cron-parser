@@ -1,1 +1,2 @@
 */5 * * * * echo "testing"
+*/10 * * * * echo "baz"
